@@ -118,6 +118,28 @@
             color: #FF2EDF;
             font-size: 0.8em;
         }
+
+        /* Estilo para contagem regressiva */
+        .countdown {
+            color: #FF2EDF;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+
+        /* Animação para o coração quando a data chegar */
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            25% { transform: scale(1.2); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .heart-celebration {
+            animation: heartbeat 0.5s infinite;
+            color: #FF0000;
+        }
     </style>
 </head>
 <body>
@@ -125,17 +147,17 @@
 
     <div class="avatars">
         <img src="assets/innable-avatar.png" alt="Innable" class="avatar" onerror="this.src='https://via.placeholder.com/120/FF2EDF/FFFFFF?text=Innable'; this.onerror=null;">
-        <div class="heart">❤️</div>
+        <div class="heart" id="heart">❤️</div>
         <img src="assets/dashii-avatar.png" alt="Dashii" class="avatar" onerror="this.src='https://via.placeholder.com/120/FF2EDF/FFFFFF?text=Dashii'; this.onerror=null;">
     </div>
 
     <div class="status-bar">
         <div class="status-item">
-            <span>Uptime:</span>
-            <span id="uptime">Carregando...</span>
+            <span>Contagem para o início:</span>
+            <span id="uptime">Calculando...</span>
         </div>
         <div class="status-item">
-            <span>Pacotes de amor recebidos:</span>
+            <span>Pacotes de amor preparados:</span>
             <span>∞</span>
         </div>
         <div class="status-item">
@@ -143,6 +165,8 @@
             <span>❤️ 100%</span>
         </div>
     </div>
+
+    <div class="countdown" id="countdown"></div>
 
     <div class="text">Escolha uma opção:</div>
 
@@ -156,29 +180,51 @@
     </div>
 
     <script>
-        // Calcula o tempo de namoro (2 de agosto de 2023)
-        const startDate = new Date('2023-08-02');
+        // Data do início do namoro (2 de agosto de 2026)
+        const startDate = new Date('2026-08-02');
         const now = new Date();
-        const diffTime = Math.abs(now - startDate);
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-        document.getElementById('uptime').textContent = `${diffDays} dias`;
 
-        // Função para mostrar o tempo de namoro formatado
-        function formatUptime(days) {
-            const years = Math.floor(days / 365);
-            const months = Math.floor((days % 365) / 30);
-            const remainingDays = days % 30;
+        // Verifica se a data já passou
+        if (now >= startDate) {
+            // Se a data já passou, mostra o tempo de namoro
+            const diffTime = Math.abs(now - startDate);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-            let result = '';
-            if (years > 0) result += `${years} ano${years > 1 ? 's' : ''}, `;
-            if (months > 0) result += `${months} mês${months > 1 ? 'es' : ''}, `;
-            result += `${remainingDays} dia${remainingDays !== 1 ? 's' : ''}`;
+            document.getElementById('uptime').textContent = `${diffDays} dias`;
+            document.getElementById('heart').classList.add('heart-celebration');
+            document.querySelector('.status-bar .status-item:first-child span:first-child').textContent = 'Tempo de namoro:';
+        } else {
+            // Se a data ainda não passou, mostra a contagem regressiva
+            function updateCountdown() {
+                const now = new Date();
+                const diffTime = Math.abs(startDate - now);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-            return result;
+                // Calcula anos, meses e dias restantes
+                const years = Math.floor(diffDays / 365);
+                const months = Math.floor((diffDays % 365) / 30);
+                const days = diffDays % 30;
+
+                let countdownText = '';
+                if (years > 0) countdownText += `${years} ano${years > 1 ? 's' : ''}, `;
+                if (months > 0) countdownText += `${months} mês${months > 1 ? 'es' : ''}, `;
+                countdownText += `${days} dia${days !== 1 ? 's' : ''}`;
+
+                document.getElementById('uptime').textContent = countdownText;
+
+                // Atualiza a contagem regressiva detalhada
+                const hours = Math.floor((diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diffTime % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diffTime % (1000 * 60)) / 1000);
+
+                document.getElementById('countdown').textContent =
+                    `Faltam: ${days} dias, ${hours} horas, ${minutes} minutos e ${seconds} segundos`;
+            }
+
+            // Atualiza a contagem regressiva a cada segundo
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
         }
-
-        // Atualiza o uptime com formatação mais bonita
-        document.getElementById('uptime').textContent = formatUptime(diffDays);
     </script>
 </body>
 </html>
