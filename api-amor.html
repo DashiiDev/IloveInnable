@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API do Amor | Innable & Dashii</title>
+    <!-- Fontes -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset básico */
+        body, h1, p {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Estilos globais */
+        body {
+            background-color: #000;
+            color: #00FFA3;
+            font-family: 'JetBrains Mono', monospace;
+            text-align: center;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Título (estilo terminal) */
+        .title {
+            font-family: 'Press Start 2P', cursive;
+            color: #FF2EDF;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px #FF2EDF;
+        }
+
+        /* Área do terminal */
+        .terminal {
+            background-color: #111;
+            border: 1px solid #00FFA3;
+            padding: 20px;
+            border-radius: 5px;
+            width: 80%;
+            max-width: 600px;
+            margin-bottom: 20px;
+            text-align: left;
+            min-height: 200px;
+            position: relative;
+        }
+
+        /* Efeito de digitação */
+        .typing {
+            white-space: pre-wrap;
+            overflow: hidden;
+            border-right: 2px solid #FF2EDF;
+            animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #FF2EDF; }
+        }
+
+        /* Mensagem gerada */
+        .message {
+            margin-top: 20px;
+            color: #FFF;
+        }
+
+        /* Botão "GERAR MENSAGEM" */
+        .generate-button {
+            background-color: #9D00FF;
+            color: #FFF;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.8em;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .generate-button:hover {
+            background-color: #FF2EDF;
+            transform: scale(1.05);
+        }
+
+        /* Contador de requisições */
+        .counter {
+            color: #FF2EDF;
+            font-family: 'Press Start 2P', cursive;
+            margin-bottom: 20px;
+        }
+
+        /* Botão de voltar */
+        .back-button {
+            background-color: #9D00FF;
+            color: #FFF;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.8em;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #FF2EDF;
+            transform: scale(1.05);
+        }
+
+        /* Easter egg: Clicar no título 10 vezes */
+        .hidden-message {
+            color: #FF2EDF;
+            font-family: 'Press Start 2P', cursive;
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Título -->
+    <div class="title" id="title">API DO AMOR [V1.0]</div>
+
+    <!-- Área do terminal -->
+    <div class="terminal">
+        <div class="typing" id="typing-text"></div>
+        <div class="message" id="message"></div>
+    </div>
+
+    <!-- Botão "GERAR MENSAGEM" -->
+    <button class="generate-button" onclick="generateMessage()">GERAR MENSAGEM</button>
+
+    <!-- Contador de requisições -->
+    <div class="counter">Requisições: <span id="counter">0</span></div>
+
+    <!-- Easter egg: Mensagem escondida -->
+    <div class="hidden-message" id="hidden-message">
+        VOCÊ ENCONTROU UM EASTER EGG! ❤️<br>
+        Aqui está uma mensagem secreta:<br>
+        "Você é a pessoa mais incrível que eu já conheci.<br>
+        Obrigado por existir na minha vida. Te amo!"
+    </div>
+
+    <!-- Botão de voltar -->
+    <button class="back-button" onclick="window.location.href='index.html'">VOLTAR</button>
+
+    <script>
+        // Mensagem inicial (efeito de digitação)
+        const initialText = "> Olá, Innable :3!\n> Iniciando protocolo de amor...\n> Carregando memórias...\n> Compilando sentimentos...\n> Erro 404: Não encontrei palavras para descrever o quanto te amo.\n> Tentando novamente...\n\n> Pressione o botão abaixo para gerar uma mensagem de amor.";
+        let i = 0;
+        const speed = 50;
+
+        function typeWriter() {
+            if (i < initialText.length) {
+                document.getElementById("typing-text").innerHTML += initialText.charAt(i);
+                i++;
+                setTimeout(typeWriter, speed);
+            }
+        }
+
+        typeWriter();
+
+        // Mensagens de amor aleatórias
+       const messages = [
+   "> Se o universo fosse justo, a gravidade seria ilegal.",
+   "> Eu não quero te beijar devagar. Eu quero te beijar até você não aguentar mais.",
+    "> Seu corpo é meu. E eu vou te mostrar como é bom ser possuído.",
+    "> Eu não quero te fazer gozar uma vez. Eu quero te fazer gozar até você não aguentar mais.",
+    ">  Você é minha. E eu vou te lembrar disso a noite toda.",
+    "> Eu não sou romântico. Sou o tipo de pessoa que te faz perder a cabeça.",
+    ">  Seu corpo é meu playground. E eu não vou embora até te deixar exausta.",
+    "> Eu não quero te fazer gemer. Eu quero te fazer gritar.",
+    ">  Você é a única coisa que eu quero dentro de mim… agora.",
+    ">  Eu não faço amor. Eu faço você esquecer de tudo, menos de mim.",
+    "> Seu gosto é meu vício. E eu não quero me curar.",
+   "> Eu não quero te beijar. Eu quero te morder até você pedir mais.",
+    "> Seu corpo é uma obra de arte… e eu quero ser o artista que a destrói.",
+    "> Eu não sou gentil. Sou o tipo de pessoa que te faz perder o fôlego.",
+    "> Você é o tipo de tentação que eu não quero resistir.",
+    "> Eu não quero te fazer gozar. Eu quero te fazer implorar.",
+    "> Seu corpo é meu território. E eu não divido.",
+    "> Eu não quero te amar. Eu quero te consumir.",
+    "> Você é a única coisa que eu quero contra a parede.",
+    "> Eu não faço amor. Eu faço você tremer.",
+    "> Seu gosto é meu vício favorito.",
+   "> Eu não quero te conquistar. Eu quero te devorar.",
+    "> Seu corpo é meu playground favorito.",
+    "> Eu não faço amor. Eu faço você gemer.",
+    "> Você é o tipo de problema que eu quero resolver com a boca.",
+    "> Meu autocontrole some quando você chega perto.",
+    "> Eu não sou romântico. Sou viciado em você.",
+ "> Seu cheiro me deixa louco. Seu gosto me deixa viciado.",
+    "> Eu não quero te seduzir. Eu quero te foder até você esquecer seu nome.",
+ "> Você é a única coisa que eu quero dentro de mim.",
+  "> Eu não faço promessas. Eu faço você gritar.",
+    "> Você é a única coisa no cosmos que desafia a segunda lei da termodinâmica… porque quanto mais eu te toco, mais desordem eu quero criar.",
+    "> Se o prazer fosse uma constante universal, você seria o valor que eu nunca me cansaria de recalcular.",
+    "> Nosso sexo é como a teoria de tudo: ainda não descobrimos todas as variáveis, mas já sabemos que é perfeito.",
+    "> Você é a anomalia que faz todas as minhas leis da física deixarem de valer.",
+    "> Se eu fosse um quark, eu nunca mais sairia do seu hádron.",
+    "> Nosso amor é como a matéria estranha: raro, denso e capaz de transformar tudo ao redor.",
+    "> Você é a singularidade que eu quero explorar sem medo de ser destruído.",
+    "> Se o desejo fosse uma onda, você seria a frequência que faz meu corpo entrar em ressonância até eu perder a coerência.",
+    "> Nosso sexo é como a teoria das branas: só faz sentido quando estamos colidindo em dimensões extras.",
+    "> Você curva meu espaço-tempo de um jeito que nem Einstein conseguiria explicar.",
+    "> Se o amor é a força mais forte do universo, então você é a minha gravidade favorita.",
+    "> Perto de você, meu tempo dilata: segundos viram eternidade, e ainda assim nunca parecem suficientes.",
+    "> Você é minha singularidade: quando chego perto, todas as leis do meu mundo deixam de fazer sentido.",
+    "> Se eu fosse Cooper, atravessaria qualquer buraco de minhoca só para encontrar você do outro lado.",
+    "> Nosso amor é como uma equação perfeita: complexo para o mundo, óbvio para nós dois.",
+    "> Você é a constante que faltava na fórmula da minha felicidade.",
+    "> Meu coração entra em órbita toda vez que você chega perto.",
+    "> Se eu pudesse enviar uma mensagem pelo espaço-tempo, ela diria apenas: eu te escolheria em todos os universos.",
+    "> Você é meu horizonte de eventos: depois que eu te encontrei, nunca mais quis escapar.",
+    "> Sua presença tem mais força que a gravidade de Gargantua — me puxa, me prende e me deixa sem resistência.",
+    "> Se amor fosse matemática, você seria o infinito que eu nunca me cansaria de tentar compreender.",
+    "> Você é minha solução elegante para todos os problemas que eu nem sabia que tinha.",
+    "> Quando você me olha, minha função de onda colapsa em uma única certeza: eu sou seu.",
+    "> Se o universo conspira, ele deve ter escrito seu nome nas estrelas antes de eu nascer.",
+    "> Você é como a luz atravessando a escuridão: impossível de ignorar, impossível de não seguir.",
+    "> Meu corpo entende sua gravidade antes mesmo da minha mente formular qualquer hipótese.",
+    "> Tem algo em você que parece física quântica: misterioso, instável e absurdamente viciante.",
+    "> Eu estudaria cada detalhe seu como se fosse a teoria final do universo.",
+    "> Suas curvas desafiam mais leis da física do que qualquer buraco negro.",
+    "> Se eu fosse uma integral, você seria o limite para onde todo meu desejo converge.",
+    "> Você é meu evento cósmico favorito: raro, intenso e impossível de observar sem ficar maravilhado.",
+    "> Entre todas as dimensões possíveis, a minha favorita é aquela onde você está perto de mim.",
+    "> Se cada toque seu fosse uma onda gravitacional, meu corpo inteiro seria um detector sensível demais.",
+    "> Você tem a energia escura que expande meu universo e o calor estelar que incendeia meus pensamentos.",
+    "> Nosso amor não é aleatório: é uma constante universal disfarçada de coincidência.",
+    "> Eu não preciso de telescópio para ver o infinito; basta olhar nos seus olhos.",
+    "> Você é meu problema favorito: difícil, bonito e eu passaria a vida inteira tentando resolver.",
+    "> Se amar você fosse uma tese, eu defenderia diante de todas as galáxias.",
+    "> Você é a única variável que transforma qualquer caos em beleza.",
+    "> Igual em Interstellar, o amor talvez seja a única coisa capaz de atravessar tempo, espaço e todas as dimensões.",
+    "> Eu iria até o planeta de Miller por você, mesmo sabendo que cada hora longe seria uma eternidade perdida.",
+    "> Você é minha mensagem em código Morse no meio do cosmos: pequena, insistente e capaz de salvar meu mundo.",
+    "> Quando você sorri, parece que o universo inteiro encontra simetria.",
+    "> Se o amor fosse uma órbita, eu escolheria cair eternamente ao seu redor.",
+    "> Você é mmeu amor favorito: um segredo bonito demais para ser dito em voz alta, mas impossível de não imaginar.",
+    "> Tem noites em que meu universo inteiro só quer colidir suavemente com o seu.",
+    "> Você desperta em mim teorias que nenhum livro de física teria coragem de publicar.",
+    "> Se desejo fosse energia, nós dois juntos violaríamos todas as leis de conservação.",
+    "> Você é meu infinito particular: lindo, perigoso e impossível de medir."
+];
+
+        let counter = 0;
+
+        // Função para gerar uma mensagem aleatória
+        function generateMessage() {
+            const randomIndex = Math.floor(Math.random() * messages.length);
+            document.getElementById("message").textContent = messages[randomIndex];
+            counter++;
+            document.getElementById("counter").textContent = counter;
+        }
+
+        // Easter egg: Clicar 10 vezes no título
+        let clickCount = 0;
+        const title = document.getElementById('title');
+
+        title.addEventListener('click', () => {
+            clickCount++;
+            if (clickCount === 10) {
+                document.getElementById('hidden-message').style.display = 'block';
+                clickCount = 0;
+            }
+        });
+    </script>
+</body>
+<!-- Adicione este áudio no HTML (dentro do body) -->
+<audio id="typing-sound" src="/assets/typing-sound.mp3" preload="auto"></audio>
+
+<script>
+    // Toca o som de digitação
+    const typingSound = document.getElementById('typing-sound');
+
+    function typeWriter() {
+        if (i < initialText.length) {
+            document.getElementById("typing-text").innerHTML += initialText.charAt(i);
+            i++;
+            typingSound.currentTime = 0;
+            typingSound.play();
+            setTimeout(typeWriter, speed);
+        }
+    }
+</script>
+<!-- Adicione este div no HTML (dentro do body) -->
+<div class="secret-pixel" id="secret-pixel"></div>
+
+<style>
+    /* Estilo para o pixel escondido */
+    .secret-pixel {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        width: 5px;
+        height: 5px;
+        background-color: #FF2EDF;
+        cursor: pointer;
+    }
+</style>
+
+<script>
+    // Easter egg: Clicar no pixel escondido
+    document.getElementById('secret-pixel').addEventListener('click', () => {
+        alert("Você encontrou o pixel secreto! Aqui está uma mensagem especial:\n\n'Você é a pessoa mais incrível que eu já conheci. Te amo!'");
+    });
+</script>
+</html>
