@@ -8,149 +8,177 @@
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <!-- Link para a fonte "JetBrains Mono" (estilo código) -->
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <!-- Estilos CSS (vamos adicionar agora) -->
+    <!-- Estilos CSS -->
     <style>
-    /* Reset básico */
-body, h1, p {
-    margin: 0;
-    padding: 0;
-}
+        /* Reset básico */
+        body, h1, p {
+            margin: 0;
+            padding: 0;
+        }
 
-/* Estilos globais */
-body {
-    background-color: #000;
-    color: #FFF;
-    font-family: 'JetBrains Mono', monospace;
-    text-align: center;
-    padding: 20px;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
+        /* Estilos globais */
+        body {
+            background-color: #000;
+            color: #FFF;
+            font-family: 'JetBrains Mono', monospace;
+            text-align: center;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
 
-/* Estilo para títulos (Press Start 2P) */
-.title {
-    font-family: 'Press Start 2P', cursive;
-    color: #FF2EDF;
-    font-size: 1.5em;
-    margin-bottom: 20px;
-    text-shadow: 0 0 10px #FF2EDF;
-}
+        /* Estilo para títulos (Press Start 2P) */
+        .title {
+            font-family: 'Press Start 2P', cursive;
+            color: #FF2EDF;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #FF2EDF;
+        }
 
-/* Estilo para textos normais */
-.text {
-    color: #00B4FF;
-    margin: 10px 0;
-}
+        /* Estilo para textos normais */
+        .text {
+            color: #00B4FF;
+            margin: 10px 0;
+        }
 
-/* Estilo para botões */
-.button {
-    background-color: #9D00FF;
-    color: #FFF;
-    border: none;
-    padding: 10px 20px;
-    margin: 10px;
-    border-radius: 5px;
-    font-family: 'Press Start 2P', cursive;
-    font-size: 0.8em;
-    cursor: pointer;
-    transition: all 0.3s;
-}
+        /* Estilo para botões */
+        .button {
+            background-color: #9D00FF;
+            color: #FFF;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 5px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.8em;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
 
-.button:hover {
-    background-color: #FF2EDF;
-    transform: scale(1.05);
-}
+        .button:hover {
+            background-color: #FF2EDF;
+            transform: scale(1.05);
+        }
 
-/* Estilo para avatares (fursonas) */
-.avatars {
-    display: flex;
-    gap: 20px;
-    margin: 20px 0;
-}
+        /* Estilo para avatares (fursonas) */
+        .avatars {
+            display: flex;
+            gap: 20px;
+            margin: 20px 0;
+        }
 
-.avatar {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid #FF2EDF;
-}
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #FF2EDF;
+        }
 
-/* Estilo para o coração entre os avatares */
-.heart {
-    color: #FF2EDF;
-    font-size: 2em;
-    animation: pulse 1.5s infinite;
-}
+        /* Estilo para o coração entre os avatares */
+        .heart {
+            color: #FF2EDF;
+            font-size: 2em;
+            animation: pulse 1.5s infinite;
+        }
 
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-    100% { transform: scale(1); }
-}
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
 
-/* Estilo para a barra de status (terminal) */
-.status-bar {
-    background-color: #111;
-    border: 1px solid #00FFA3;
-    padding: 15px;
-    border-radius: 5px;
-    width: 80%;
-    max-width: 500px;
-    margin: 20px 0;
-}
+        /* Estilo para a barra de status (terminal) */
+        .status-bar {
+            background-color: #111;
+            border: 1px solid #00FFA3;
+            padding: 15px;
+            border-radius: 5px;
+            width: 80%;
+            max-width: 500px;
+            margin: 20px 0;
+        }
 
-.status-item {
-    display: flex;
-    justify-content: space-between;
-    margin: 5px 0;
-}
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+        }
+
+        /* Estilo para quando a imagem não carregar */
+        .avatar {
+            background-color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FF2EDF;
+            font-size: 0.8em;
+        }
     </style>
 </head>
 <body>
-<div class="title">DASHBOARD DO AMOR [INNABLE & DASHII]</div>
+    <div class="title">DASHBOARD DO AMOR [INNABLE & DASHII]</div>
 
-<div class="avatars">
-    <img src="innable-avatar.png" alt="Innable" class="avatar">
-    <div class="heart">❤️</div>
-    <img src="dashii-avatar.png" alt="Dashii" class="avatar">
-</div>
-
-<div class="status-bar">
-    <div class="status-item">
-        <span>Uptime:</span>
-        <span id="uptime">Carregando...</span>
+    <div class="avatars">
+        <img src="assets/innable-avatar.png" alt="Innable" class="avatar" onerror="this.src='https://via.placeholder.com/120/FF2EDF/FFFFFF?text=Innable'; this.onerror=null;">
+        <div class="heart">❤️</div>
+        <img src="assets/dashii-avatar.png" alt="Dashii" class="avatar" onerror="this.src='https://via.placeholder.com/120/FF2EDF/FFFFFF?text=Dashii'; this.onerror=null;">
     </div>
-    <div class="status-item">
-        <span>Pacotes de amor recebidos:</span>
-        <span>∞</span>
-    </div>
-    <div class="status-item">
-        <span>Bateria:</span>
-        <span>❤️ 100%</span>
-    </div>
-</div>
 
-<div class="text">Escolha uma opção:</div>
+    <div class="status-bar">
+        <div class="status-item">
+            <span>Uptime:</span>
+            <span id="uptime">Carregando...</span>
+        </div>
+        <div class="status-item">
+            <span>Pacotes de amor recebidos:</span>
+            <span>∞</span>
+        </div>
+        <div class="status-item">
+            <span>Bateria:</span>
+            <span>❤️ 100%</span>
+        </div>
+    </div>
 
-<div>
-    <button class="button" onclick="window.location.href='nossa-historia.html'">NOSSA HISTÓRIA</button>
-    <button class="button" onclick="window.location.href='api-amor.html'">GERAR MENSAGEM</button>
-</div>
-<div>
-    <button class="button" onclick="window.location.href='playlist.html'">PLAYLIST</button>
-    <button class="button" onclick="window.location.href='jogos.html'">JOGAR JUNTOS</button>
-</div>
-<script>
-    // Calcula o tempo de namoro
-    const startDate = new Date('2023-11-01'); // Coloque a data que começaram a namorar
-    const now = new Date();
-    const diffTime = Math.abs(now - startDate);
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    document.getElementById('uptime').textContent = `${diffDays} dias`;
-</script>
+    <div class="text">Escolha uma opção:</div>
+
+    <div>
+        <button class="button" onclick="window.location.href='nossa-historia.html'">NOSSA HISTÓRIA</button>
+        <button class="button" onclick="window.location.href='api-amor.html'">GERAR MENSAGEM</button>
+    </div>
+    <div>
+        <button class="button" onclick="window.location.href='playlist.html'">PLAYLIST</button>
+        <button class="button" onclick="window.location.href='jogos.html'">JOGAR JUNTOS</button>
+    </div>
+
+    <script>
+        // Calcula o tempo de namoro (2 de agosto de 2023)
+        const startDate = new Date('2023-08-02');
+        const now = new Date();
+        const diffTime = Math.abs(now - startDate);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        document.getElementById('uptime').textContent = `${diffDays} dias`;
+
+        // Função para mostrar o tempo de namoro formatado
+        function formatUptime(days) {
+            const years = Math.floor(days / 365);
+            const months = Math.floor((days % 365) / 30);
+            const remainingDays = days % 30;
+
+            let result = '';
+            if (years > 0) result += `${years} ano${years > 1 ? 's' : ''}, `;
+            if (months > 0) result += `${months} mês${months > 1 ? 'es' : ''}, `;
+            result += `${remainingDays} dia${remainingDays !== 1 ? 's' : ''}`;
+
+            return result;
+        }
+
+        // Atualiza o uptime com formatação mais bonita
+        document.getElementById('uptime').textContent = formatUptime(diffDays);
+    </script>
 </body>
 </html>
